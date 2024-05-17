@@ -1,7 +1,7 @@
 {
-  "name": "settings-cleanup",
-  "displayName": "Settings Cleanup",
-  "description": "Clean up settings.json",
+  "name": "settings-organizer",
+  "displayName": "Settings Organizer",
+  "description": "Organize settings.json",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
@@ -14,7 +14,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "settings-cleanup.helloWorld",
+        "command": "settings-organizer.helloWorld",
         "title": "Hello World"
       }
     ]
