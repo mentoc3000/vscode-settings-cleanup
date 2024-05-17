@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import {foo} from '../io';
+import {foo} from '../settings';
 
 suite('IO Test Suit', () => {
 
