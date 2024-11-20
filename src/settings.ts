@@ -28,7 +28,7 @@ export function decompose(settings: Settings): Settings {
                 result[topKey] = decompose(subValue);
             }
         } else {
-            if (typeof value === 'object') {
+            if (typeof value === 'object' && !Array.isArray(value)) {
                 result[key] = decompose(value);
             } else {
                 result[key] = value;
@@ -42,7 +42,7 @@ export function condense(settings: Settings): Settings {
     let result: Settings = {};
     for (let key in settings) {
         const value = settings[key];
-        if (typeof value === 'object') {
+        if (typeof value === 'object' && !Array.isArray(value)) {
             const keys = Object.keys(value);
             if (keys.length === 1) {
                 const subkey = keys[0];

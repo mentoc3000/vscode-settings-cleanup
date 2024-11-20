@@ -34,6 +34,13 @@ suite('Settings Test Suite', () => {
 			assert.deepStrictEqual(result, expected);
 		});
 
+		test('Lists', () => {
+			let settings = { 'a': 1, 'b': [2, 3, 4] };
+			let result = decompose(settings);
+			let expected = { 'a': 1, 'b': [2, 3, 4] };
+			assert.deepStrictEqual(result, expected);
+		});
+
 	});
 
 
@@ -65,6 +72,13 @@ suite('Settings Test Suite', () => {
 			let settings = {'b': { 'c': 2 } };
 			let result = condense(settings);
 			let expected = { 'b.c': 2 };
+			assert.deepStrictEqual(result, expected);
+		});
+
+		test('Lists', () => {
+			let settings = { 'a': 1, 'b': [2, 3, 4] };
+			let result = condense(settings);
+			let expected = { 'a': 1, 'b': [2, 3, 4] };
 			assert.deepStrictEqual(result, expected);
 		});
 
