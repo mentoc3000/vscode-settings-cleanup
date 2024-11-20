@@ -1,9 +1,13 @@
-export function parseFile(text: string): number {
-    let obj = JSON.parse(text);
-    return Object.keys(obj).length;
+interface Settings { [key: string]: any }
+
+export function organizeSettings(text: string, space: number): string {
+    let settings = JSON.parse(text);
+    settings = decompose(settings);
+    settings = condense(settings);
+    settings = sortKeys(settings);
+    return JSON.stringify(settings, null, space);
 }
 
-interface Settings { [key: string]: any }
 
 export function decompose(settings: Settings): Settings {
     let result: Settings = {};
@@ -44,6 +48,19 @@ export function condense(settings: Settings): Settings {
             } else {
                 result[key] = condense(value);
             }
+        } else {
+            result[key] = value;
+        }
+    }
+    return result;
+}
+
+export function sortKeys(settings: Settings): Settings {
+    let result: Settings = {};
+    for (let key of Object.keys(settings).sort()) {
+        const value = settings[key];
+        if (typeof value === 'object') {
+            result[key] = sortKeys(value);
         } else {
             result[key] = value;
         }
