@@ -1,7 +1,9 @@
+import JSON5 from 'json5';
+
 interface Settings { [key: string]: any }
 
 export function organizeSettings(text: string, space: number): string {
-    let settings = JSON.parse(text);
+    let settings = JSON5.parse(text);
     settings = decompose(settings);
     settings = condense(settings);
     settings = sortKeys(settings);

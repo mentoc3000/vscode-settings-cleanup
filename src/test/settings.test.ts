@@ -69,4 +69,47 @@ suite('Settings Test Suite', () => {
 		});
 
 	});
+
+	suite('sortKeys', () => {
+
+		test('Empty object', () => {
+			let settings = {};
+			let result = condense(settings);
+			let expected = {};
+			assert.deepStrictEqual(result, expected);
+		});
+
+		test('Flat object', () => {
+			let settings = { 'b': 2, 'a': 1, 'c': 3 };
+			let result = condense(settings);
+			let expected = { 'a': 1, 'b': 2, 'c': 3 };
+			assert.deepStrictEqual(result, expected);
+		});
+
+		test('Nested object', () => {
+			let settings = { 'b': { 'd': 3, 'c': 2 }, 'a': 1 };
+			let result = condense(settings);
+			let expected = { 'a': 1, 'b': { 'c': 2, 'd': 3 } };
+			assert.deepStrictEqual(result, expected);
+		});
+
+		test('Shortened nested object', () => {
+			let settings = { 'b': { 'd': 3, 'c': 2 }, 'a': 1 };
+			let result = condense(settings);
+			let expected = { 'a': 1, 'b': { 'c': 2, 'd': 3 } };
+			assert.deepStrictEqual(result, expected);
+		});
+
+	});
+
+	suite('Style', () => {
+
+		test('Trailing comma', () => {
+			let settings = { 'a': 1, 'b': 2, 'c': 3, };
+			let result = condense(settings);
+			let expected = { 'a': 1, 'b': 2, 'c': 3 };
+			assert.deepStrictEqual(result, expected);
+		});
+
+	});
 });
