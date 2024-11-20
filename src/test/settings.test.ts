@@ -35,9 +35,9 @@ suite('Settings Test Suite', () => {
 		});
 
 		test('Lists', () => {
-			let settings = { 'a': 1, 'b': [2, 3, 4] };
+			let settings = { 'a': [1], 'b': [2, 3, 4], 'c': [] };
 			let result = decompose(settings);
-			let expected = { 'a': 1, 'b': [2, 3, 4] };
+			let expected = { 'a': [1], 'b': [2, 3, 4], 'c': []};
 			assert.deepStrictEqual(result, expected);
 		});
 
@@ -76,9 +76,9 @@ suite('Settings Test Suite', () => {
 		});
 
 		test('Lists', () => {
-			let settings = { 'a': 1, 'b': [2, 3, 4] };
+			let settings = { 'a': [1], 'b': [2, 3, 4], 'c': [] };
 			let result = condense(settings);
-			let expected = { 'a': 1, 'b': [2, 3, 4] };
+			let expected = { 'a': [1], 'b': [2, 3, 4], 'c': []};
 			assert.deepStrictEqual(result, expected);
 		});
 
@@ -111,6 +111,13 @@ suite('Settings Test Suite', () => {
 			let settings = { 'b': { 'd': 3, 'c': 2 }, 'a': 1 };
 			let result = condense(settings);
 			let expected = { 'a': 1, 'b': { 'c': 2, 'd': 3 } };
+			assert.deepStrictEqual(result, expected);
+		});
+
+		test('Lists', () => {
+			let settings = { 'b': [2, 3, 4], 'a': [1], 'c': [] };
+			let result = condense(settings);
+			let expected = { 'a': [1], 'b': [2, 3, 4], 'c': []};
 			assert.deepStrictEqual(result, expected);
 		});
 
