@@ -8,7 +8,7 @@
 //     value: SettingsTree[] | Value,
 // };
 
-export function parse(text: string): number {
+export function parseFile(text: string): number {
     return text.length;
 }
 

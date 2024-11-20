@@ -1,13 +1,13 @@
 import * as assert from 'assert';
 
-import { parse } from '../settings';
+import { parseFile } from '../settings';
 
 suite('Settings Test Suite', () => {
 
 	suite('parse', () => {
 
 		test('Empty string', () => {
-			assert.deepStrictEqual(parse(''), 0);
+			assert.deepStrictEqual(parseFile(''), 0);
 		});
 
 	});
