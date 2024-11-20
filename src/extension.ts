@@ -23,13 +23,13 @@ function organize() {
   // Display a message box to the user
   const file = vscode.window.activeTextEditor?.document.getText();
   // Default spacing of JSON files
-  const workbenchConfig = vscode.workspace.getConfiguration('workbench');
-  const spacing = workbenchConfig.get<number>('editor.tabSize');
-  const defaultSpacing = 4;
+  const workbenchConfig = vscode.workspace.getConfiguration();
+  const tabSize = workbenchConfig.get<number>('editor.tabSize');
+  const defaultTabSize = 4;
 
   const organizedSettings = organizeSettings(
     file || '',
-    spacing || defaultSpacing
+    tabSize || defaultTabSize
   );
   // Replace contents of file
   vscode.window.activeTextEditor?.edit((editBuilder) => {

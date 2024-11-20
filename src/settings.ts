@@ -4,12 +4,12 @@ interface Settings {
   [key: string]: any;
 }
 
-export function organizeSettings(text: string, space: number): string {
+export function organizeSettings(text: string, tabSize: number): string {
   let settings = JSON5.parse(text);
   settings = decompose(settings);
   settings = condense(settings);
   settings = sortKeys(settings);
-  return JSON.stringify(settings, null, space);
+  return JSON.stringify(settings, null, tabSize);
 }
 
 export function decompose(settings: Settings): Settings {
