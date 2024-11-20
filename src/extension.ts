@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     'settings-organizer.organize',
     () => {
-      if (!confirmFile()) {
+      if (!proceedWithFile() || !proceedWithComments()) {
         return;
       }
 
@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 }
 
-function confirmFile(): boolean {
+function proceedWithFile(): boolean {
   // Check that the file is a settings file
   const fileName = vscode.window.activeTextEditor?.document.fileName;
   if (!fileName || !fileName.endsWith('settings.json')) {
@@ -61,6 +61,36 @@ function confirmFile(): boolean {
     vscode.window
       .showInformationMessage(
         'This might not be a VS Code settings file. Do you want to proceed?',
+        'No',
+        'Yes'
+      )
+      .then((answer) => {
+        return answer === 'Yes';
+      });
+  }
+  return true;
+}
+
+function proceedWithComments(): boolean {
+  // Check that the file has no comments
+  const fileContent = vscode.window.activeTextEditor?.document.getText();
+
+  if (!fileContent) {
+    return true;
+  }
+
+  // Regular expressions for detecting comments
+  const singleLineComment = /\/\/.*/g; // Matches // comments
+  const multiLineComment = /\/\*[\s\S]*?\*\//g; // Matches /* */ comments
+
+  if (
+    singleLineComment.test(fileContent) ||
+    multiLineComment.test(fileContent)
+  ) {
+    // show dialog
+    vscode.window
+      .showInformationMessage(
+        'This settings file may contain contain comments, which will be lost after organizing. Do you want to proceed?',
         'No',
         'Yes'
       )
