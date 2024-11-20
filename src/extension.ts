@@ -18,21 +18,8 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     'settings-organizer.organize',
     () => {
-      // Check that the file is a settings file
-      const fileName = vscode.window.activeTextEditor?.document.fileName;
-      if (!fileName || !fileName.endsWith('settings.json')) {
-        // show dialog
-        vscode.window
-          .showInformationMessage(
-            'This might not be a VS Code settings file. Do you want to proceed?',
-            'No',
-            'Yes'
-          )
-          .then((answer) => {
-            if (answer === 'No') {
-              return;
-            }
-          });
+      if (!confirmFile()) {
+        return;
       }
 
       // The code you place here will be executed every time your command is executed
@@ -64,6 +51,24 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(disposable);
+}
+
+function confirmFile(): boolean {
+  // Check that the file is a settings file
+  const fileName = vscode.window.activeTextEditor?.document.fileName;
+  if (!fileName || !fileName.endsWith('settings.json')) {
+    // show dialog
+    vscode.window
+      .showInformationMessage(
+        'This might not be a VS Code settings file. Do you want to proceed?',
+        'No',
+        'Yes'
+      )
+      .then((answer) => {
+        return answer === 'Yes';
+      });
+  }
+  return true;
 }
 
 // This method is called when your extension is deactivated
