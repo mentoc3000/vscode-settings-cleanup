@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "settings-organizer.characterCount",
-        "title": "Character Count"
+        "command": "settings-organizer.organize",
+        "title": "Organize VS Code Settings"
       }
     ]
   },
