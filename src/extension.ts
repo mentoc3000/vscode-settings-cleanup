@@ -18,6 +18,23 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     'settings-organizer.organize',
     () => {
+      // Check that the file is a settings file
+      const fileName = vscode.window.activeTextEditor?.document.fileName;
+      if (!fileName || !fileName.endsWith('settings.json')) {
+        // show dialog
+        vscode.window
+          .showInformationMessage(
+            'This might not be a VS Code settings file. Do you want to proceed?',
+            'No',
+            'Yes'
+          )
+          .then((answer) => {
+            if (answer === 'No') {
+              return;
+            }
+          });
+      }
+
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
       const file = vscode.window.activeTextEditor?.document.getText();
@@ -25,6 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
       const workbenchConfig = vscode.workspace.getConfiguration('workbench');
       const spacing = workbenchConfig.get<number>('editor.tabSize');
       const defaultSpacing = 4;
+
       const organizedSettings = organizeSettings(
         file || '',
         spacing || defaultSpacing
