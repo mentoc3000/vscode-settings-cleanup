@@ -31,3 +31,22 @@ export function decompose(settings: Settings): Settings {
     }
     return result;
 }
+
+export function condense(settings: Settings): Settings {
+    let result: Settings = {};
+    for (let key in settings) {
+        const value = settings[key];
+        if (typeof value === 'object') {
+            const keys = Object.keys(value);
+            if (keys.length === 1) {
+                const subkey = keys[0];
+                result[`${key}.${subkey}`] = value[subkey];
+            } else {
+                result[key] = condense(value);
+            }
+        } else {
+            result[key] = value;
+        }
+    }
+    return result;
+}
