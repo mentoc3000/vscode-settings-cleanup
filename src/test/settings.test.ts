@@ -1,10 +1,14 @@
 import * as assert from 'assert';
 
-import {foo} from '../settings';
+import { parse } from '../settings';
 
-suite('IO Test Suit', () => {
+suite('Settings Test Suite', () => {
 
-	test('Sample test', () => {
-		assert.strictEqual(foo(), 'foo');	
+	suite('parse', () => {
+
+		test('Empty string', () => {
+			assert.deepStrictEqual(parse(''), 0);
+		});
+
 	});
 });
