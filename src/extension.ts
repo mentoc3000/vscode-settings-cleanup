@@ -14,8 +14,8 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 }
 
-function organize() {
-  if (!proceedWithFile() || !proceedWithComments()) {
+async function organize() {
+  if (!(await proceedWithFile()) || !(await proceedWithComments())) {
     return;
   }
 
@@ -46,25 +46,22 @@ function organize() {
   });
 }
 
-function proceedWithFile(): boolean {
+async function proceedWithFile(): Promise<boolean> {
   // Check that the file is a settings file
   const fileName = vscode.window.activeTextEditor?.document.fileName;
   if (!fileName || !fileName.endsWith('settings.json')) {
     // show dialog
-    vscode.window
-      .showInformationMessage(
-        'This might not be a VS Code settings file. Do you want to proceed?',
-        'No',
-        'Yes'
-      )
-      .then((answer) => {
-        return answer === 'Yes';
-      });
+    const answer = await vscode.window.showInformationMessage(
+      'This might not be a VS Code settings file. Do you want to proceed?',
+      'No',
+      'Yes'
+    );
+    return answer === 'Yes';
   }
   return true;
 }
 
-function proceedWithComments(): boolean {
+async function proceedWithComments(): Promise<boolean> {
   // Check that the file has no comments
   const fileContent = vscode.window.activeTextEditor?.document.getText();
 
@@ -81,15 +78,12 @@ function proceedWithComments(): boolean {
     multiLineComment.test(fileContent)
   ) {
     // show dialog
-    vscode.window
-      .showInformationMessage(
-        'This settings file may contain contain comments, which will be lost after organizing. Do you want to proceed?',
-        'No',
-        'Yes'
-      )
-      .then((answer) => {
-        return answer === 'Yes';
-      });
+    const answer = await vscode.window.showInformationMessage(
+      'This settings file may contain contain comments, which will be lost after organizing. Do you want to proceed?',
+      'No',
+      'Yes'
+    );
+    return answer === 'Yes';
   }
   return true;
 }
