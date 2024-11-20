@@ -82,6 +82,13 @@ suite('Settings Test Suite', () => {
 			assert.deepStrictEqual(result, expected);
 		});
 
+		test('Language specific settings', () => {
+			let settings = { '[html]': { 'editor': {'tabSize': 2} } };
+			let result = condense(settings);
+			let expected = { '[html]': { 'editor.tabSize': 2} };
+			assert.deepStrictEqual(result, expected);
+		});
+
 	});
 
 	suite('sortKeys', () => {

@@ -42,7 +42,9 @@ export function condense(settings: Settings): Settings {
     let result: Settings = {};
     for (let key in settings) {
         const value = settings[key];
-        if (typeof value === 'object' && !Array.isArray(value)) {
+        if (key.startsWith('[')) {
+            result[key] = condense(value);
+        } else if (typeof value === 'object' && !Array.isArray(value)) {
             const keys = Object.keys(value);
             if (keys.length === 1) {
                 const subkey = keys[0];
