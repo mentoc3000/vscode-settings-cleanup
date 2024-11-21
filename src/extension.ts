@@ -1,5 +1,3 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { organizeSettings } from './settings';
 
@@ -14,6 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 }
 
+/// Organize the settings file
 async function organize() {
   if (!(await proceedWithFile()) || !(await proceedWithComments())) {
     return;
@@ -22,6 +21,7 @@ async function organize() {
   // The code you place here will be executed every time your command is executed
   // Display a message box to the user
   const file = vscode.window.activeTextEditor?.document.getText();
+
   // Default spacing of JSON files
   const workbenchConfig = vscode.workspace.getConfiguration();
   const tabSize = workbenchConfig.get<number>('editor.tabSize');
@@ -31,6 +31,7 @@ async function organize() {
     file || '',
     tabSize || defaultTabSize
   );
+
   // Replace contents of file
   vscode.window.activeTextEditor?.edit((editBuilder) => {
     editBuilder.replace(
@@ -46,6 +47,7 @@ async function organize() {
   });
 }
 
+/// Check if the file is a settings file
 async function proceedWithFile(): Promise<boolean> {
   // Check that the file is a settings file
   const fileName = vscode.window.activeTextEditor?.document.fileName;
@@ -61,6 +63,7 @@ async function proceedWithFile(): Promise<boolean> {
   return true;
 }
 
+/// Check if the file has comments
 async function proceedWithComments(): Promise<boolean> {
   // Check that the file has no comments
   const fileContent = vscode.window.activeTextEditor?.document.getText();
