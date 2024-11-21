@@ -69,6 +69,13 @@ suite('Settings Test Suite', () => {
       assert.deepStrictEqual(result, expected);
     });
 
+    test('Shortened deeply nested object', () => {
+      let settings = { a: { b: { c: { d: 2 } } } };
+      let result = condense(settings);
+      let expected = { 'a.b.c.d': 2 };
+      assert.deepStrictEqual(result, expected);
+    });
+
     test('Lists', () => {
       let settings = { a: [1], b: [2, 3, 4], c: [] };
       let result = condense(settings);

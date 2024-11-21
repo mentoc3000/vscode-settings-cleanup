@@ -47,8 +47,9 @@ export function condense(settings: Settings): Settings {
     } else if (typeof value === 'object' && !Array.isArray(value)) {
       const keys = Object.keys(value);
       if (keys.length === 1) {
-        const subkey = keys[0];
-        result[`${key}.${subkey}`] = value[subkey];
+        const condensedValue = condense(value);
+        const subkey = Object.keys(condensedValue)[0];
+        result[`${key}.${subkey}`] = condensedValue[subkey];
       } else {
         result[key] = condense(value);
       }
