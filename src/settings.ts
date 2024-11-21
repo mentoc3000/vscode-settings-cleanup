@@ -63,7 +63,9 @@ export function sortKeys(settings: Settings): Settings {
   let result: Settings = {};
   for (let key of Object.keys(settings).sort(compare)) {
     const value = settings[key];
-    if (typeof value === 'object' && !Array.isArray(value)) {
+    if (Array.isArray(value)) {
+      result[key] = value.sort();
+    } else if (typeof value === 'object') {
       result[key] = sortKeys(value);
     } else {
       result[key] = value;
