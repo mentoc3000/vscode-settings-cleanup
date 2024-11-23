@@ -3,7 +3,7 @@
   "displayName": "Settings.json Organizer",
   "description": "Organize VS Code settings.json files",
   "publisher": "mentoc3000",
-  "icon": "images/icon.png",
+  "icon": "assets/icon.png",
   "keywords": [
     "settings",
     "organizer",
@@ -36,8 +36,8 @@
         "title": "Organize VS Code Settings",
         "category": "Settings",
         "icon": {
-          "light": "images/spray-light.svg",
-          "dark": "images/spray-dark.svg"
+          "light": "assets/spray-light.svg",
+          "dark": "assets/spray-dark.svg"
         }
       }
     ],
