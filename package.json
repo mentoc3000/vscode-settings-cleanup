@@ -2,12 +2,19 @@
   "name": "settings-organizer",
   "displayName": "Settings Organizer",
   "description": "Organize VS Code settings.json files",
+  "publisher": "mentoc3000",
   "icon": "images/icon.png",
+  "keywords": [
+    "settings",
+    "organizer",
+    "json",
+    "vscode"
+  ],
   "galleryBanner": {
     "color": "#C80000",
     "theme": "dark"
   },
-  "license": "SEE LICENSE IN LICENSE FILE",
+  "license": "MIT",
   "homepage": "https://github.com/mentoc3000/vscode-settings-cleanup/blob/main/README.md",
   "repository": {
     "type": "git",
