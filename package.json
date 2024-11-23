@@ -33,7 +33,12 @@
     "commands": [
       {
         "command": "settings-organizer.organize",
-        "title": "Organize VS Code Settings"
+        "title": "Organize VS Code Settings",
+        "category": "Settings",
+        "icon": {
+          "light": "images/spray-light.svg",
+          "dark": "images/spray-dark.svg"
+        }
       }
     ]
   },
