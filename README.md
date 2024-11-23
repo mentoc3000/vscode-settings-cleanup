@@ -7,6 +7,14 @@ VS Code Settings Organizer is a Visual Studio Code extension that allows you to 
 - Sort alphabetically
 - Place language-specific settings at the end of the file
 
+## Usage
+
+### Command
+
+1. Open the settings JSON file in VS Code.
+2. Open the command palette (Ctrl+Shift+P) and search for "Organize VS Code Settings".
+3. Select the command and the extension will organize your settings.
+
 ## Before
 
 ```json

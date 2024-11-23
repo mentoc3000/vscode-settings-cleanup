@@ -1,6 +1,6 @@
 {
-  "name": "settings-organizer",
-  "displayName": "Settings Organizer",
+  "name": "vscode-settings-organizer",
+  "displayName": "Settings.json Organizer",
   "description": "Organize VS Code settings.json files",
   "publisher": "mentoc3000",
   "icon": "images/icon.png",
