@@ -5,6 +5,7 @@ All notable changes to the "Settings.json Organizer" extension will be documente
 ## [0.1.2]
 
 - Added button to editor title menu bar
+- Added demo gif
 
 ## [0.1.1]
 
